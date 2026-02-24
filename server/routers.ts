@@ -57,6 +57,7 @@ export const appRouter = router({
         
         return {
           sessionId,
+          resumeUrl,
           parsedData
         };
       }),
