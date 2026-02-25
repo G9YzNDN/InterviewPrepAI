@@ -4,8 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
+  "db:generate": "drizzle-kit generate",
   "db:migrate": "drizzle-kit migrate",
-  "start": "pnpm run db:migrate && node dist/index.js"
+  "start": "node dist/index.js"
 },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
