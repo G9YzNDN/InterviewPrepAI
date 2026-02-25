@@ -8,6 +8,22 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
 
+const getLocalIdentity = () => {
+  let openId = localStorage.getItem("local_open_id");
+  if (!openId) {
+    openId = `local:${crypto.randomUUID()}`;
+    localStorage.setItem("local_open_id", openId);
+  }
+
+  let name = localStorage.getItem("local_name");
+  if (!name) {
+    name = window.prompt("Your name (for this app):")?.trim() || "User";
+    localStorage.setItem("local_name", name);
+  }
+
+  return { openId, name };
+};
+
 const queryClient = new QueryClient();
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
@@ -42,11 +58,14 @@ const trpcClient = trpc.createClient({
     httpBatchLink({
       url: "/api/trpc",
       transformer: superjson,
+
       fetch(input, init) {
-        return globalThis.fetch(input, {
-          ...(init ?? {}),
-          credentials: "include",
-        });
+        const { openId, name } = getLocalIdentity();
+        const headers = new Headers(init?.headers);
+        headers.set("x-open-id", openId);
+        headers.set("x-name", name);
+
+        return globalThis.fetch(input, { ...(init ?? {}), headers });
       },
     }),
   ],
