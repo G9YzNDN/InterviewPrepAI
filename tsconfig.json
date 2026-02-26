@@ -1,5 +1,5 @@
 {
-  "include": ["client/src/**/*", "server/**/*", "shared/**/*", "drizzle/**/*", "vite.config.ts"],
+  "include": ["client/src/**/*", "shared/**/*", "server/**/*", "drizzle/**/*", "vite.config.ts", "drizzle.config.ts"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
     "outDir": "dist",
@@ -7,14 +7,14 @@
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
     "noEmit": true,
-    "module": "NodeNext",
+    "module": "ESNext",
     "strict": true,
     "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Bundler",
     "target": "ES2022",
     "baseUrl": ".",
     "types": ["node", "vite/client"],
@@ -23,5 +23,4 @@
       "@shared/*": ["./shared/*"]
     }
   }
-  
 }
