@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build:client": "vite build --outDir dist/public",
-    "build:server": "esbuild server/_core/index.prod.ts --bundle --packages=external --platform=node --format=cjs --target=node22 --outfile=dist/index.cjs --sourcemap",
+    "build:server": "esbuild server/_core/index.prod.ts --bundle --platform=node --format=cjs --target=node22 --outfile=dist/index.cjs --sourcemap --tsconfig=tsconfig.json --packages=external",
     "build": "pnpm run build:client && pnpm run build:server",
     "start": "node dist/index.cjs",
+    "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
